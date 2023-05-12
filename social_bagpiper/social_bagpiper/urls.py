@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 import apps.authentication.views
 import apps.social.views
 
@@ -26,3 +29,7 @@ urlpatterns = [
     path('logout/', apps.authentication.views.logout_user, name='logout'),
     path('home/', apps.social.views.home, name='home'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
