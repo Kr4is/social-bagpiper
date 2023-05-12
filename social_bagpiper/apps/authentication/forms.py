@@ -10,7 +10,7 @@ class LoginForm(forms.Form):
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(max_length=63)
-    fullname = forms.CharField(max_length=63)
+    country = forms.CharField(max_length=63)
     password1 = forms.CharField(max_length=63, widget=forms.PasswordInput)
     password2 = forms.CharField(max_length=63, widget=forms.PasswordInput)
 
@@ -21,6 +21,7 @@ class RegisterForm(UserCreationForm):
             "last_name",
             "username",
             "email",
+            "country",
             "password1",
             "password2",
         ]
