@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('social', '0003_tags_song_tags'),
+        ("social", "0003_tags_song_tags"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='song',
-            options={'ordering': ['-modification_date']},
+            name="song",
+            options={"ordering": ["-modification_date"]},
         ),
         migrations.AlterField(
-            model_name='song',
-            name='modification_date',
+            model_name="song",
+            name="modification_date",
             field=models.DateField(auto_now=True, db_index=True),
         ),
     ]

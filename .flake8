@@ -1,0 +1,23 @@
+[flake8]
+exclude =
+    .git,
+    .eggs,
+    *.egg-info
+    .vscode,
+    __pycache__,
+    build,
+    dist,
+    tests,
+    docs,
+    setup.py,
+    docs/conf.py,
+    tools/*
+    
+max-line-length = 100
+docstring-convention = google
+per-file-ignores = tests/*: D1
+ignore =
+    # Exclude some missing docstrings errors
+    D100, D101, D104, D105, D106, D107, D202
+    # Exclude errors conflicting with black
+    W503, W504, E203, E501, BLK100

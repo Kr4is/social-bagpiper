@@ -2,28 +2,39 @@ from django.db import models
 
 from ..authentication.models import User
 
+
 class UserFollowing(models.Model):
-    user_id = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
-    following_user_id = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
+    user_id = models.ForeignKey(
+        User, related_name="following", on_delete=models.CASCADE
+    )
+    following_user_id = models.ForeignKey(
+        User, related_name="followers", on_delete=models.CASCADE
+    )
     created = models.DateTimeField(auto_now_add=True, db_index=True)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['user_id','following_user_id'],  name="unique_followers")
+            models.UniqueConstraint(
+                fields=["user_id", "following_user_id"], name="unique_followers"
+            )
         ]
         ordering = ["-created"]
 
     def __str__(self):
         return f"{self.user_id} follows {self.following_user_id}"
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=128)
+
     def __str__(self):
         return f"{self.name}"
 
+
 def song_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/<uploader>/<name>
-    return f'production_files/music_sheets/{instance.uploader.id}/{instance.name}.pdf'
+    return f"production_files/music_sheets/{instance.uploader.id}/{instance.name}.pdf"
+
 
 class Song(models.Model):
     name = models.CharField(max_length=255)
@@ -34,8 +45,8 @@ class Song(models.Model):
     modification_date = models.DateField(auto_now=True, db_index=True)
     tags = models.ManyToManyField(
         Tag,
-        through='Tags',
-        through_fields=('song', 'tag'),
+        through="Tags",
+        through_fields=("song", "tag"),
     )
 
     class Meta:
@@ -43,6 +54,7 @@ class Song(models.Model):
 
     def __str__(self):
         return f"{self.name} by {self.uploader}"
+
 
 class Tags(models.Model):
     song = models.ForeignKey(Song, on_delete=models.CASCADE, related_name="tagged_song")

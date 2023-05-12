@@ -4,15 +4,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('authentication', '0001_initial'),
+        ("authentication", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='profile_photo',
-            field=models.ImageField(default='static/login_files/ny-img1.png', upload_to=''),
+            model_name="user",
+            name="profile_photo",
+            field=models.ImageField(
+                default="static/login_files/ny-img1.png", upload_to=""
+            ),
         ),
     ]
