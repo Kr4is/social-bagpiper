@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 import apps.authentication.views
+import apps.social.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', apps.authentication.views.login_page, name='login'),
+    path('logout/', apps.authentication.views.logout_user, name='logout'),
+    path('home/', apps.social.views.home, name='home'),
 ]
