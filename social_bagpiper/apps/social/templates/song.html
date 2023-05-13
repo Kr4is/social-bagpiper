@@ -63,10 +63,18 @@ SmartPiper Home
                                             <br>
                                             <br>
                                         <p>
+                                            MIDI player
+                                            <br><br>
                                             <midi-visualizer type="staff" id="myVisualizer"></midi-visualizer>
                                             <midi-player src="{{ song.midi_file.url }}" type="piano-roll" sound-font
                                                 visualizer="#myVisualizer">
                                             </midi-player>
+                                            <br><br>
+                                            MP3 player
+                                            <br><br>
+                                            <audio controls>
+                                                <source src="{{ song.mp3_file.url }}" type="audio/mp3">
+                                            </audio> 
                                             <br><br>
                                             <embed src="{{ song.music_sheet.url}}" type="application/pdf" width="100%"
                                                 height="700px" />

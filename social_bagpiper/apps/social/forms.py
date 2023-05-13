@@ -10,7 +10,7 @@ class SongForm(forms.ModelForm):
 
     class Meta:
         model = models.Song
-        fields = ["name", "description", "music_sheet", "midi_file"]
+        fields = ["name", "description", "music_sheet", "midi_file", "mp3_file"]
 
 
 class EventForm(forms.ModelForm):

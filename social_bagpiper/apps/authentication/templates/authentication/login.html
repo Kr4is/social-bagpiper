@@ -29,15 +29,23 @@ Social Bagpiper Login
                         <div class="col-lg-6">
                             <div class="login-sec">
                                 <ul class="sign-control">
-                                    <li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
-                                    <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+                                    {% if log_in_form.non_field_errors %}
+                                        <li data-tab="tab-1" class="current"><a href="#" title="">Sign in</a></li>
+                                    {% else %}
+                                        <li data-tab="tab-1"><a href="#" title="">Sign in</a></li>
+                                    {% endif %}
+                                    {% if sign_in_form.errors %}
+                                        <li data-tab="tab-2" class="current"><a href="#" title="">Sign up</a></li>
+                                    {% else %}
+                                        <li data-tab="tab-2"><a href="#" title="">Sign up</a></li>
+                                    {% endif %}
                                 </ul>
                                 <div class="sign_in_sec current" id="tab-1">
                                     <h3>Sign in</h3>
                                     <!-- <p>{{ message }}</p> -->
-                                    {% if form.non_field_errors %}
+                                    {% if log_in_form.non_field_errors %}
                                         <div class="alert alert-danger" role="alert">
-                                            {{ form.non_field_errors }}
+                                            {{ log_in_form.non_field_errors }}
                                         </div>
                                     {% endif %}
                                     <form data-bitwarden-watching="1" method="post">
@@ -87,13 +95,6 @@ Social Bagpiper Login
                                     </div> -->
                                 </div>
                                 <div class="sign_in_sec" id="tab-2">
-                                    <div class="signup-tab">
-                                        <i class="fa fa-long-arrow-left"></i>
-                                        <ul>
-                                            <li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
-                                            <li data-tab="tab-4"><a href="#" title="">Group</a></li>
-                                        </ul>
-                                    </div>
                                     <div class="dff-tab current" id="tab-3">
                                         <form data-bitwarden-watching="1" method="post">
                                             {% csrf_token %}
@@ -163,6 +164,20 @@ Social Bagpiper Login
                                                 <div class="col-lg-12 no-pdd">
                                                     <button type="submit" name="sign_in_user" value="submit">Get Started</button>
                                                 </div>
+                                                {% if sign_in_form.errors %}
+                                                    {% for field in sign_in_form %}
+                                                        {% for error in field.errors %}
+                                                            <div class="alert alert-danger">
+                                                                <strong>{{ error|escape }}</strong>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endfor %}
+                                                    {% for error in sign_in_form.non_field_errors %}
+                                                        <div class="alert alert-danger">
+                                                            <strong>{{ error|escape }}</strong>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
                                             </div>
                                         </form>
                                     </div>
