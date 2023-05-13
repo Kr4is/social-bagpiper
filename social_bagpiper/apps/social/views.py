@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.template import loader
 
 from . import forms
@@ -62,6 +62,6 @@ def songs(request):
     return HttpResponse(template.render(context, request))
 
 
-def song(request):
-    if request.method == "GET":
-        pass
+def song(request, item_id):
+    song = Song.objects.get(pk=item_id)
+    return render(request, "song.html", {"song": song})
