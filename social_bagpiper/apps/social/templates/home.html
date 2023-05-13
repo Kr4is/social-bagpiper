@@ -41,7 +41,7 @@ SmartPiper Home
                                             <span>{{ follower_number }}</span>
                                         </li>
                                         <li>
-                                            <a href="https://gambolthemes.net/workwise-new/my-profile.html"
+                                            <a style="text-decoration: none;" href="/profile/{{ user.id }}"
                                                 title="">View Profile</a>
                                         </li>
                                     </ul>
@@ -49,7 +49,6 @@ SmartPiper Home
                                 <div class="suggestions full-width">
                                     <div class="sd-title">
                                         <h3>Suggestions</h3>
-                                        <i class="la la-ellipsis-v"></i>
                                     </div>
                                     <div class="suggestions-list">
                                         {% for recommended_user in recommended_users %}
@@ -64,9 +63,6 @@ SmartPiper Home
                                             <span><i class="la la-plus"></i></span>
                                         </div>
                                         {% endfor %}
-                                        <div class="view-more">
-                                            <a href="#" title="">View More</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +79,8 @@ SmartPiper Home
                                     
                                     <div class="post-st">
                                         <ul>
-                                            <li><a class="post_project" href="#" title="">Post a Song</a></li>
-                                            <li><a class="post-jb active" href="#" title="">Post an Event</a></li>
+                                            <li><a style="text-decoration: none;" class="post_project" href="#" title="">Post a Song</a></li>
+                                            <li><a style="text-decoration: none;" class="post-jb active" href="#" title="">Post an Event</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -99,17 +95,6 @@ SmartPiper Home
                                                     <span><img src="{% static '/login_files/clock.png' %}" alt="">{{ song.song.upload_date }}</span>
                                                 </div>
                                             </div>
-                                            <!-- <div class="ed-opts">
-                                                <a href="#" title="" class="ed-opts-open"><i
-                                                        class="la la-ellipsis-v"></i></a>
-                                                <ul class="ed-options">
-                                                    <li><a href="#" title="">Edit Post</a></li>
-                                                    <li><a href="#" title="">Unsaved</a></li>
-                                                    <li><a href="#" title="">Unbid</a></li>
-                                                    <li><a href="#" title="">Close</a></li>
-                                                    <li><a href="#" title="">Hide</a></li>
-                                                </ul>
-                                            </div> -->
                                         </div>
                                         <div class="epi-sec">
                                             <ul class="descp">
@@ -118,21 +103,21 @@ SmartPiper Home
                                                         alt=""><span>{{ song.song.uploader.country }}</span></li>
                                             </ul>
                                             <ul class="bk-links">
-                                                <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-                                                <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
+                                                <li><a style="text-decoration: none;" href="#" title=""><i class="la la-bookmark"></i></a></li>
+                                                <li><a style="text-decoration: none;" href="#" title=""><i class="la la-envelope"></i></a></li>
                                             </ul>
                                         </div>
                                         <div class="job_descp">
                                             <h3>{{ song.song.name }}</h3>
                                             <ul class="job-dt">
-                                                <li><a href="#" title="">Muiñeira</a></li>
-                                                <li><a href="#" title="">Dificil</a></li>
+                                                <li><a style="text-decoration: none;" href="#" title="">Muiñeira</a></li>
+                                                <li><a style="text-decoration: none;" href="#" title="">Dificil</a></li>
                                                 <li><span>1,5 min</span></li>
                                             </ul>
                                             <p>{{ song.song.description }}
                                                 <br>
                                                 <br>
-                                                <a href="/song/{{ song.song.id }}" title="">view more</a>
+                                                <a style="text-decoration: none;" href="/song/{{ song.song.id }}" title="">view more</a>
                                             </p>
                                             <ul class="skill-tags">
                                                 {% for tag in song.tags %}
@@ -143,14 +128,14 @@ SmartPiper Home
                                         <div class="job-status-bar">
                                             <ul class="like-com">
                                                 <li>
-                                                    <a href="#"><i class="fas fa-heart"></i> Like</a>
+                                                    <a style="text-decoration: none;" href="#"><i class="fas fa-heart"></i> Like</a>
                                                     <img src="{% static '/login_files/liked-img.png' %}" alt="">
                                                     <span>25</span>
                                                 </li>
-                                                <li><a href="#" class="com"><i class="fas fa-comment-alt"></i>
+                                                <li><a style="text-decoration: none;" href="#" class="com"><i class="fas fa-comment-alt"></i>
                                                         Comment 15</a></li>
                                             </ul>
-                                            <a href="#"><i class="fas fa-eye"></i>Views 50</a>
+                                            <a style="text-decoration: none;" href="#"><i class="fas fa-eye"></i>Views 50</a>
                                         </div>
                                     </div>
                                     {% endfor %}
@@ -192,7 +177,6 @@ SmartPiper Home
                                 <div class="widget widget-jobs">
                                     <div class="sd-title">
                                         <h3>Recommended songs</h3>
-                                        <i class="la la-ellipsis-v"></i>
                                     </div>
                                     <div class="jobs-list">
                                         {% for recommended_song in recommended_songs %}
@@ -242,13 +226,12 @@ SmartPiper Home
                         <div class="col-lg-12">
                             <ul>
                                 <li><button class="active" name="upload_song" type="submit" value="post">Post</button></li>
-                                <li><a href="#" title="">Cancel</a></li>
+                                <li><a style="text-decoration: none;" href="/home" title="">Cancel</a></li>
                             </ul>
                         </div>
                     </div>
                 </form>
             </div>
-            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
         </div>
     </div>
     <div class="post-popup job_post">
@@ -277,13 +260,12 @@ SmartPiper Home
                         <div class="col-lg-12">
                             <ul>
                                 <li><button class="active" name="upload_event" type="submit" value="post">Post</button></li>
-                                <li><a href="#" title="">Cancel</a></li>
+                                <li><a style="text-decoration: none;" href="/home" title="">Cancel</a></li>
                             </ul>
                         </div>
                     </div>
                 </form>
             </div>
-            <a href="#" title=""><i class="la la-times-circle-o"></i></a>
         </div>
     </div>
 </div>

@@ -15,19 +15,19 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="/home" title="">
+                        <a style="text-decoration: none;" href="/home" title="">
                             <span><img src="{% static '/login_files/icon1.png' %}" alt=""></span>
                             Home
                         </a>
                     </li>
                     <li>
-                        <a href="/songs" title="">
+                        <a style="text-decoration: none;" href="/songs" title="">
                             <span><img src="{% static '/login_files/icon3.png' %}" alt=""></span>
                             Songs
                         </a>
                     </li>
                     <li>
-                        <a href="/events" title="">
+                        <a style="text-decoration: none;" href="/events" title="">
                             <span><img src="{% static '/login_files/icon5.png' %}" alt=""></span>
                             Events
                         </a>
@@ -39,7 +39,7 @@
                         </a>
                     </li> -->
                     <li>
-                        <a href="/player" title="">
+                        <a style="text-decoration: none;" href="/player" title="">
                             <span><img src="{% static '/login_files/icon7.png' %}" alt=""></span>
                             Player
                         </a>
@@ -52,20 +52,20 @@
             <div class="user-account">
                 <div class="user-info">
                     <img style="max-height:35px;max-width:35px;height:auto;width:auto;" src="{{ user.profile_photo.url }}" alt="">
-                    <a href="#" title="">{{ user.username }}</a>
+                    <a style="text-decoration: none;" href="#" title="">{{ user.username }}</a>
                     <!-- <i class="la la-sort-down"></i> -->
                 </div>
                 <div class="user-account-settingss" id="users">
                     <h3>Setting</h3>
                     <ul class="us-links">
-                        <li><a href="/profile/{{ user.id }}" title="">Profile</a></li>
-                        <li><a href="https://gambolthemes.net/workwise-new/profile-account-setting.html"
+                        <li><a style="text-decoration: none;" href="/profile/{{ user.id }}" title="">Profile</a></li>
+                        <li><a style="text-decoration: none;" href="https://gambolthemes.net/workwise-new/profile-account-setting.html"
                                 title="">Account Setting</a></li>
-                        <li><a href="#" title="">Privacy</a></li>
-                        <li><a href="#" title="">Faqs</a></li>
-                        <li><a href="#" title="">Terms &amp; Conditions</a></li>
+                        <li><a style="text-decoration: none;" href="#" title="">Privacy</a></li>
+                        <li><a style="text-decoration: none;" href="#" title="">Faqs</a></li>
+                        <li><a style="text-decoration: none;" href="#" title="">Terms &amp; Conditions</a></li>
                     </ul>
-                    <h3 class="tc"><a href="{% url 'logout' %}" title="">Logout</a></h3>
+                    <h3 class="tc"><a style="text-decoration: none;" href="{% url 'logout' %}" title="">Logout</a></h3>
                 </div>
             </div>
         </div>
