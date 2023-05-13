@@ -130,7 +130,16 @@ def groups(request):
 @login_required
 def group(request, item_id):
     group = Group.objects.get(pk=item_id)
-    return render(request, "group.html", {"group": group})
+    recommended_users = User.objects.filter(~Q(id=request.user.id))
+
+    return render(
+        request,
+        "group.html",
+        {
+            "group": group,
+            "recommended_users": recommended_users,
+        },
+    )
 
 
 @login_required
