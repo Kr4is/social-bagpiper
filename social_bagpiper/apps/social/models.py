@@ -49,6 +49,7 @@ def mp3_directory_path(instance, filename):
 class Song(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True)
+    views = models.IntegerField(default=0)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
     music_sheet = models.FileField(upload_to=song_directory_path)
     midi_file = models.FileField(upload_to=midi_directory_path, null=True)

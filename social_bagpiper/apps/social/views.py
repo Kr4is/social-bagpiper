@@ -97,6 +97,8 @@ def songs(request):
 @login_required
 def song(request, item_id):
     song = Song.objects.get(pk=item_id)
+    song.views += 1
+    song.save()
     return render(request, "song.html", {"song": song})
 
 
