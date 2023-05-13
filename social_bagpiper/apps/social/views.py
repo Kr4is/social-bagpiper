@@ -44,3 +44,22 @@ def home(request):
         "profile_image": profile_image,
     }
     return HttpResponse(template.render(context, request))
+
+
+def songs(request):
+    template = loader.get_template("songs.html")
+    songs_to_show = {}
+    songs = Song.objects.all()
+    for index, song in enumerate(songs):
+        songs_to_show.update({index: {"song": song, "tags": song.tags.all()}})
+
+    context = {
+        "songs": songs,
+        "songs_to_show": songs_to_show,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def song(request):
+    if request.method == "GET":
+        pass

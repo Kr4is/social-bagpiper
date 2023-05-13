@@ -26,7 +26,9 @@ urlpatterns = [
     path("", apps.authentication.views.login_page, name="login"),
     path("logout/", apps.authentication.views.logout_user, name="logout"),
     path("home/", apps.social.views.home, name="home"),
+    path("songs/", apps.social.views.songs, name="songs"),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
