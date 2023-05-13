@@ -19,14 +19,13 @@ SmartPiper Home
                                 <div class="post-bar">
                                     <div class="post_topbar">
                                         <div class="usy-dt">
-                                            <img src="{%static 'songs_files/bg-img2.png' %}" alt="">
+                                            <img style="max-height:50px;max-width:50px;height:auto;width:auto;" src="{{ song.uploader.profile_photo.url }}" alt="">
                                             <div class="usy-name">
-                                                <h3>John Doe</h3>
-                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min
-                                                    ago</span>
+                                                <h3>{{ song.uploader.first_name }} {{ song.uploader.last_name }}</h3>
+                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">{{ song.upload_date }}</span>
                                             </div>
                                         </div>
-                                        <div class="ed-opts">
+                                        <!-- <div class="ed-opts">
                                             <a href="#" title="" class="ed-opts-open"><i
                                                     class="la la-ellipsis-v"></i></a>
                                             <ul class="ed-options">
@@ -36,47 +35,46 @@ SmartPiper Home
                                                 <li><a href="#" title="">Close</a></li>
                                                 <li><a href="#" title="">Hide</a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="epi-sec">
                                         <ul class="descp">
-                                            <li><img src="{%static 'songs_files/icon8.png' %}" alt=""><span>Front End
-                                                    Developer</span>
+                                            <li><img src="{%static 'songs_files/icon8.png' %}" alt=""><span>Bag Piper</span>
                                             </li>
-                                            <li><img src="{%static 'songs_files/icon9.png' %}" alt=""><span>India</span>
+                                            <li><img src="{%static 'songs_files/icon9.png' %}" alt=""><span>{{ song.uploader.country }}</span>
                                             </li>
                                         </ul>
                                         <ul class="bk-links">
                                             <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
                                             <li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-                                            <li><a href="#" title="" class="bid_now">Bid Now</a></li>
+                                            <!-- <li><a href="#" title="" class="bid_now">Bid Now</a></li> -->
                                         </ul>
                                     </div>
                                     <div class="job_descp accountnone">
-                                        <h3>Ios Shopping mobile app</h3>
+                                        <h3>{{ song.name }}</h3>
                                         <ul class="job-dt">
-                                            <li><span>$500 - $600</span></li>
+                                            <li><a href="#" title="">Muiñeira</a></li>
+                                            <li><a href="#" title="">Dificil</a></li>
+                                            <li><span>1,5 min</span></li>
                                         </ul>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In porttitor
-                                            ligula et dolor dignissim, sit amet efficitur felis maximus.
-                                            Suspendisse metus magna, tempus eu ultrices et, maximus id tellus. Ut eu
-                                            lacinia ante, id facilisis enim. s. ut suscipit urna sollicitudin at...
-                                            view more <a href="#" title="">view more</a></p>
+                                        <p>{{ song.description }}
+                                            <br>
+                                            <br>
                                         <p>
-                                            <midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
+                                            <midi-visualizer type="staff" id="myVisualizer"></midi-visualizer>
                                             <midi-player
-                                                src="/media/HesaPirate.mid"
+                                                src="{{ song.midi_file.url }}"
                                                 type="piano-roll"
                                                 sound-font visualizer="#myVisualizer">
                                             </midi-player>
                                         </p>
-                                        <ul class="skill-tags">
+                                        <!-- <ul class="skill-tags">
                                             <li><a href="#" title="">HTML</a></li>
                                             <li><a href="#" title="">PHP</a></li>
                                             <li><a href="#" title="">CSS</a></li>
                                             <li><a href="#" title="">Javascript</a></li>
                                             <li><a href="#" title="">Wordpress</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                     <div class="job-status-bar btm-line">
                                         <ul class="like-com">
