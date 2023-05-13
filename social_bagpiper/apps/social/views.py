@@ -6,7 +6,7 @@ from django.template import loader
 
 from ..authentication.models import User
 from . import forms
-from .models import Song
+from .models import Event, Song
 
 
 @login_required
@@ -70,6 +70,25 @@ def songs(request):
 def song(request, item_id):
     song = Song.objects.get(pk=item_id)
     return render(request, "song.html", {"song": song})
+
+
+def events(request):
+    template = loader.get_template("events.html")
+    events_to_show = {}
+    events = Event.objects.all()
+    for index, event in enumerate(events):
+        events_to_show.update({index: {"event": event}})
+
+    context = {
+        "events": events,
+        "events_to_show": events_to_show,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def event(request, item_id):
+    event = Event.objects.get(pk=item_id)
+    return render(request, "event.html", {"event": event})
 
 
 def profile(request):

@@ -28,6 +28,8 @@ urlpatterns = [
     path("home/", apps.social.views.home, name="home"),
     path("songs/", apps.social.views.songs, name="songs"),
     path("song/<int:item_id>/", apps.social.views.song, name="song"),
+    path("events/", apps.social.views.events, name="events"),
+    path("event/<int:item_id>/", apps.social.views.event, name="event"),
     path("profile/", apps.social.views.profile, name="profile"),
 ]
 
