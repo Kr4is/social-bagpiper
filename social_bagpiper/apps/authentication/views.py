@@ -6,6 +6,7 @@ from . import forms
 
 def login_page(request):
     message = ""
+    form = None
     if request.method == "POST":
         if "log_in" in request.POST:
             form = forms.LoginForm(request.POST)
@@ -18,7 +19,7 @@ def login_page(request):
                     login(request, user)
                     return redirect("home")
                 else:
-                    message = "Login failed!"
+                    form.add_error(None, "Invalid username or password!")
 
         elif "sign_in_user" in request.POST:
             form = forms.RegisterForm(request.POST)
@@ -35,7 +36,9 @@ def login_page(request):
             else:
                 message = "SignUp failed!"
 
-    return render(request, "authentication/login.html", context={"message": message})
+    return render(
+        request, "authentication/login.html", context={"message": message, "form": form}
+    )
 
 
 def logout_user(request):

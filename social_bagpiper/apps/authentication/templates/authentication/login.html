@@ -35,6 +35,11 @@ Social Bagpiper Login
                                 <div class="sign_in_sec current" id="tab-1">
                                     <h3>Sign in</h3>
                                     <!-- <p>{{ message }}</p> -->
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ form.non_field_errors }}
+                                        </div>
+                                    {% endif %}
                                     <form data-bitwarden-watching="1" method="post">
                                         {% csrf_token %}
                                         <div class="row">
