@@ -67,6 +67,7 @@ def home(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def songs(request):
     template = loader.get_template("songs.html")
     songs_to_show = {}
@@ -81,11 +82,13 @@ def songs(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def song(request, item_id):
     song = Song.objects.get(pk=item_id)
     return render(request, "song.html", {"song": song})
 
 
+@login_required
 def events(request):
     template = loader.get_template("events.html")
     events_to_show = {}
@@ -100,11 +103,13 @@ def events(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def event(request, item_id):
     event = Event.objects.get(pk=item_id)
     return render(request, "event.html", {"event": event})
 
 
+@login_required
 def profile(request):
     template = loader.get_template("profile.html")
     songs = Song.objects.filter(Q(uploader__id=request.user.id))
@@ -113,6 +118,7 @@ def profile(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required
 def player(request):
     template = loader.get_template("player.html")
     context = {}
