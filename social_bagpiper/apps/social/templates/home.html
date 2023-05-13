@@ -20,7 +20,6 @@ SmartPiper Home
                                     <div class="user-profile">
                                         <div class="username-dt">
                                             <div class="usr-pic">
-                                                <!-- <img src="{% static '/login_files/user-pic.png' %}" alt=""> -->
                                                 <img src="{{ profile_image }}" alt="">
                                             </div>
                                         </div>
@@ -60,7 +59,7 @@ SmartPiper Home
                                                     <span>{{ recommended_user.country }} </span>
                                                 </div>
                                             </a>
-                                            <span><i class="la la-plus"></i></span>
+                                            <span onclick="window.location='/follow/{{ recommended_user.id }}'"><i class="la la-plus"></i></span>
                                         </div>
                                         {% endfor %}
                                     </div>

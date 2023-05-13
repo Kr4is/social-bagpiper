@@ -8,7 +8,7 @@ from django.template import loader
 
 from ..authentication.models import User
 from . import forms
-from .models import Event, Group, Song
+from .models import Event, Group, Song, UserFollowing
 
 
 @login_required
@@ -57,9 +57,15 @@ def home(request):
     following_number = request.user.following.count()
     follower_number = request.user.followers.count()
     profile_image = request.user.profile_photo.url
-    recommended_users = User.objects.filter(~Q(id=request.user.id))
     incomming_events = Event.objects.filter(end_date__gt=datetime.now())
     recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
+    recommended_users = []
+
+    for user in User.objects.filter(~Q(id=request.user.id)):
+        fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
+        if fool:
+            continue
+        recommended_users.append(user)
 
     context = {
         "songs": songs,
@@ -83,7 +89,13 @@ def songs(request):
     for index, song in enumerate(songs):
         songs_to_show.update({index: {"song": song, "tags": song.tags.all()}})
     incomming_events = Event.objects.filter(end_date__gt=datetime.now())
-    recommended_users = User.objects.filter(~Q(id=request.user.id))
+    recommended_users = []
+
+    for user in User.objects.filter(~Q(id=request.user.id)):
+        fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
+        if fool:
+            continue
+        recommended_users.append(user)
 
     context = {
         "songs": songs,
@@ -109,8 +121,14 @@ def events(request):
     events = Event.objects.all()
     for index, event in enumerate(events):
         events_to_show.update({index: {"event": event}})
-    recommended_users = User.objects.filter(~Q(id=request.user.id))
     recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
+    recommended_users = []
+
+    for user in User.objects.filter(~Q(id=request.user.id)):
+        fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
+        if fool:
+            continue
+        recommended_users.append(user)
 
     context = {
         "events": events,
@@ -149,7 +167,13 @@ def groups(request):
 @login_required
 def group(request, item_id):
     group = Group.objects.get(pk=item_id)
-    recommended_users = User.objects.filter(~Q(id=request.user.id))
+    recommended_users = []
+
+    for user in User.objects.filter(~Q(id=request.user.id)):
+        fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
+        if fool:
+            continue
+        recommended_users.append(user)
 
     return render(
         request,
@@ -174,9 +198,15 @@ def profile(request, item_id):
     template = loader.get_template("profile.html")
     selected_user = User.objects.get(pk=item_id)
     songs = Song.objects.filter(Q(uploader__id=item_id))
-    recommended_users = User.objects.filter(~Q(id=item_id))
     following_number = selected_user.following.count()
     follower_number = selected_user.followers.count()
+    recommended_users = []
+
+    for user in User.objects.filter(~Q(id=request.user.id)):
+        fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
+        if fool:
+            continue
+        recommended_users.append(user)
     context = {
         "selected_user": selected_user,
         "songs": songs,
@@ -188,3 +218,15 @@ def profile(request, item_id):
     print(songs)
 
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def follow(request, item_id):
+    user = User.objects.get(pk=item_id)
+
+    follow = UserFollowing()
+    follow.user_id = request.user
+    follow.following_user_id = user
+    follow.save()
+
+    return redirect("home")
