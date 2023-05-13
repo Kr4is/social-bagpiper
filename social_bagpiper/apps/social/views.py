@@ -82,10 +82,14 @@ def songs(request):
     songs = Song.objects.all()
     for index, song in enumerate(songs):
         songs_to_show.update({index: {"song": song, "tags": song.tags.all()}})
+    incomming_events = Event.objects.filter(end_date__gt=datetime.now())
+    recommended_users = User.objects.filter(~Q(id=request.user.id))
 
     context = {
         "songs": songs,
         "songs_to_show": songs_to_show,
+        "incomming_events": incomming_events,
+        "recommended_users": recommended_users,
     }
     return HttpResponse(template.render(context, request))
 
@@ -103,10 +107,14 @@ def events(request):
     events = Event.objects.all()
     for index, event in enumerate(events):
         events_to_show.update({index: {"event": event}})
+    recommended_users = User.objects.filter(~Q(id=request.user.id))
+    recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
 
     context = {
         "events": events,
         "events_to_show": events_to_show,
+        "recommended_users": recommended_users,
+        "recommended_songs": recommended_songs,
     }
     return HttpResponse(template.render(context, request))
 
