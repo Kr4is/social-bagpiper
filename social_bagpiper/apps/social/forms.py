@@ -15,3 +15,21 @@ class SongForm(forms.ModelForm):
             "description",
             "music_sheet",
         ]
+
+
+class EventForm(forms.ModelForm):
+    name = forms.CharField(max_length=255)
+    description = forms.CharField()
+    poster = forms.FileField()
+    start_date = forms.DateField()
+    end_date = forms.DateField()
+
+    class Meta:
+        model = models.Event
+        fields = [
+            "name",
+            "description",
+            "poster",
+            "start_date",
+            "end_date",
+        ]
