@@ -36,11 +36,17 @@ def song_directory_path(instance, filename):
     return f"music_sheets/{instance.uploader.id}/{instance.name}.pdf"
 
 
+def midi_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/<uploader>/<name>
+    return f"midi_file/{instance.uploader.id}/{instance.name}.mid"
+
+
 class Song(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
     music_sheet = models.FileField(upload_to=song_directory_path)
+    midi_file = models.FileField(upload_to=midi_directory_path, null=True)
     upload_date = models.DateField(auto_now_add=True)
     modification_date = models.DateField(auto_now=True, db_index=True)
     tags = models.ManyToManyField(
