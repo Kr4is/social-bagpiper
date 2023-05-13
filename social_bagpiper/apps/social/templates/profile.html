@@ -152,7 +152,7 @@ SmartPiper Home
                                             <p>{{ song.description }}
                                                 <br>
                                                 <br>
-                                                <a style="text-decoration: none;" href="/song/{{ song.song.id }}" title="">view more</a>
+                                                <a style="text-decoration: none;" href="/song/{{ song.id }}" title="">View more</a>
                                             </p>
                                         </div>
                                         <div class="job-status-bar">
@@ -165,7 +165,7 @@ SmartPiper Home
                                                 <li><a style="text-decoration: none;" href="#" class="com"><i class="fas fa-comment-alt"></i>
                                                         Comment 15</a></li>
                                             </ul>
-                                            <a style="text-decoration: none;" href="#"><i class="fas fa-eye"></i>Views 50</a>
+                                            <a style="text-decoration: none;" href="#"><i class="fas fa-eye"></i>Views {{ song.views }}</a>
                                         </div>
                                     </div>
                                     {% endfor %}
