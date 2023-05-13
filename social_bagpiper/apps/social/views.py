@@ -50,33 +50,33 @@ def home(request):
 
     template = loader.get_template("home.html")
     user_groups = request.user.groups.all()
-    songs_to_show = {}
-    songs = Song.objects.all()
-    for index, song in enumerate(songs):
-        songs_to_show.update({index: {"song": song, "tags": song.tags.all()}})
     following_number = request.user.following.count()
     follower_number = request.user.followers.count()
-    profile_image = request.user.profile_photo.url
     incomming_events = Event.objects.filter(end_date__gt=datetime.now())
     recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
-    recommended_users = []
 
+    recommended_users = []
+    followed_users = []
     for user in User.objects.filter(~Q(id=request.user.id)):
         fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
         if fool:
+            followed_users.append(user)
             continue
         recommended_users.append(user)
 
+    songs_to_recommend = []
+    for user in followed_users:
+        for song in recommended_songs.filter(uploader__id=user.id):
+            songs_to_recommend.append(song)
+    print(songs_to_recommend)
+
     context = {
-        "songs": songs,
-        "songs_to_show": songs_to_show,
         "user_groups": user_groups,
         "following_number": following_number,
         "follower_number": follower_number,
-        "profile_image": profile_image,
         "recommended_users": recommended_users,
         "incomming_events": incomming_events,
-        "recommended_songs": recommended_songs,
+        "songs_to_recommend": songs_to_recommend,
     }
     return HttpResponse(template.render(context, request))
 
@@ -89,8 +89,8 @@ def songs(request):
     for index, song in enumerate(songs):
         songs_to_show.update({index: {"song": song, "tags": song.tags.all()}})
     incomming_events = Event.objects.filter(end_date__gt=datetime.now())
-    recommended_users = []
 
+    recommended_users = []
     for user in User.objects.filter(~Q(id=request.user.id)):
         fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
         if fool:
@@ -122,8 +122,8 @@ def events(request):
     for index, event in enumerate(events):
         events_to_show.update({index: {"event": event}})
     recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
-    recommended_users = []
 
+    recommended_users = []
     for user in User.objects.filter(~Q(id=request.user.id)):
         fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
         if fool:
@@ -167,8 +167,8 @@ def groups(request):
 @login_required
 def group(request, item_id):
     group = Group.objects.get(pk=item_id)
-    recommended_users = []
 
+    recommended_users = []
     for user in User.objects.filter(~Q(id=request.user.id)):
         fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
         if fool:
@@ -200,8 +200,8 @@ def profile(request, item_id):
     songs = Song.objects.filter(Q(uploader__id=item_id))
     following_number = selected_user.following.count()
     follower_number = selected_user.followers.count()
-    recommended_users = []
 
+    recommended_users = []
     for user in User.objects.filter(~Q(id=request.user.id)):
         fool = UserFollowing.objects.filter(Q(following_user_id=user.id))
         if fool:
