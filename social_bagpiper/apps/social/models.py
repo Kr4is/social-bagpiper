@@ -89,3 +89,30 @@ class Event(models.Model):
 
     def __str__(self):
         return f"{self.name} by {self.uploader}"
+
+
+class Group(models.Model):
+    name = models.CharField(max_length=128)
+    profile_photo = models.ImageField(default="default.jpg", upload_to="groups_images")
+    creation_date = models.DateField(auto_now_add=True, null=True)
+    users = models.ManyToManyField(
+        User,
+        through="Membership",
+        through_fields=("group", "user"),
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Membership(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    inviter = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="membership_invites",
+    )
+
+    def __str__(self):
+        return f"{self.user} at {self.group} by {self.inviter}"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Event, Song, Tag, Tags, UserFollowing
+from .models import Event, Group, Membership, Song, Tag, Tags, UserFollowing
 
 
 class UserFollowingAdmin(admin.ModelAdmin):
@@ -40,8 +40,22 @@ class EventAdmin(admin.ModelAdmin):
     )
 
 
+class GroupAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "profile_photo",
+        "creation_date",
+    )
+
+
+class MembershipAdmin(admin.ModelAdmin):
+    list_display = ("group", "user", "inviter")
+
+
 admin.site.register(UserFollowing, UserFollowingAdmin)
 admin.site.register(Song, SongAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Tags, TagsAdmin)
 admin.site.register(Event, EventAdmin)
+admin.site.register(Group, GroupAdmin)
+admin.site.register(Membership, MembershipAdmin)
