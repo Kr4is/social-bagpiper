@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template import loader
 
+from ..authentication.models import User
 from . import forms
 from .models import Song
 
@@ -37,6 +39,8 @@ def home(request):
     following_number = request.user.following.count()
     follower_number = request.user.followers.count()
     profile_image = request.user.profile_photo.url
+    recommended_users = User.objects.filter(~Q(id=request.user.id))
+
     context = {
         "songs": songs,
         "songs_to_show": songs_to_show,
@@ -44,6 +48,7 @@ def home(request):
         "following_number": following_number,
         "follower_number": follower_number,
         "profile_image": profile_image,
+        "recommended_users": recommended_users,
     }
     return HttpResponse(template.render(context, request))
 
