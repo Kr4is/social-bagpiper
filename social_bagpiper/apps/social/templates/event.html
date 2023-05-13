@@ -21,8 +21,8 @@ SmartPiper Home
                                         <div class="usy-dt">
                                             <img style="max-height:50px;max-width:50px;height:auto;width:auto;" src="{{ event.uploader.profile_photo.url }}" alt="">
                                             <div class="usy-name">
-                                                <h3>{{ song.uploader.first_name }} {{ song.uploader.last_name }}</h3>
-                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">{{ song.upload_date }}</span>
+                                                <h3>{{ event.uploader.first_name }} {{ event.uploader.last_name }}</h3>
+                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">{{ event.upload_date }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -136,50 +136,45 @@ SmartPiper Home
 
                     <div class="col-xl-3 col-lg-3 col-md-12">
                         <div class="right-sidebar">
+                            <div class="widget widget-projectid">
+                                <h3>Project ID : {{ event.id }}</h3>
+                            </div>
                             <div class="widget widget-about bid-place">
                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#applyjob" data-whatever="@mdo">Place a Bid</button>
+                                    data-target="#applyjob" data-whatever="@mdo">Donate</button>
                             </div>
-
-                            <div class="widget widget-projectid">
-                                <h3>Project ID : 123456789</h3>
-                                <p>Report Project</p>
-                            </div>
-
                             <div class="widget widget-jobs">
                                 <div class="sd-title">
-                                    <h3>About the Client</h3>
+                                    <h3>About the uploader</h3>
                                     <i class="la la-ellipsis-v"></i>
                                 </div>
                                 <div class="sd-title paymethd">
-                                    <h4>Payment Method</h4>
-                                    <p>Verified</p>
+                                    <h4>Raputation</h4>
                                     <ul class="star">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><a style="text-decoration: none;" href="#">5.00 of 5 Reviews</a></li>
                                     </ul>
                                 </div>
                                 <div class="sd-title">
-                                    <h4>India</h4>
-                                    <p>SKS Nagar, Ludhiana 1 AM</p>
+                                    <h4>Country</h4>
+                                    <p>{{ event.uploader.country }}</p>
                                 </div>
                                 <div class="sd-title">
-                                    <h4>20 Projects Posted | 15 Jobs Posted</h4>
-                                    <p>85% Hire Rate, 15% Open Jobs</p>
+                                    <h4>Posts</h4>
+                                    <p>20 Events | 15 Songs</p>
                                 </div>
                                 <div class="sd-title">
                                     <h4>Member Since</h4>
-                                    <p>August 24, 2017</p>
+                                    <p>{{ event.uploader.date_joined }}</p>
                                 </div>
                             </div>
 
                             <div class="widget widget-jobs">
                                 <div class="sd-title">
-                                    <h3>Project Link</h3>
+                                    <h3>Event Link</h3>
                                     <i class="la la-ellipsis-v"></i>
                                 </div>
                                 <div class="sd-title copylink">
@@ -212,154 +207,7 @@ SmartPiper Home
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="freelancerbiding">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <h3>Freelancers Bidding (4)</h3>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="repcent">
-                                    <h3>Reputation<i class="la la-angle-down"></i></h3>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="bidrit">
-                                    <h3>Bid (USD)</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="usy-dt">
-                                    <img src="{%static 'songs_files/jass.png' %}" alt="">
-                                    <div class="usy-name">
-                                        <h3>Jass Singh</h3>
-                                        <span><img src="{%static 'songs_files/icon9.png' %}" alt="">India</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="repcent">
-                                    <ul class="star">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
-                                    <span>4.5</span>
-                                    <p>3 Reviews</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="bidrit">
-                                    <h3>$510</h3>
-                                    <p>In 10 Days</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="usy-dt">
-                                    <img src="{%static 'songs_files/jassica.jpg' %}" alt="">
-                                    <div class="usy-name">
-                                        <h3>Jassica William</h3>
-                                        <span><img src="{%static 'songs_files/icon9.png' %}" alt="">New York</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="repcent">
-                                    <ul class="star">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
-                                    <span>5</span>
-                                    <p>12 Reviews</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="bidrit">
-                                    <h3>$510</h3>
-                                    <p>In 10 Days</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="usy-dt">
-                                    <img src="{%static 'songs_files/rock.jpg' %}" alt="">
-                                    <div class="usy-name">
-                                        <h3>Afzal Ahmad</h3>
-                                        <span><img src="{%static 'songs_files/icon9.png' %}" alt="">India</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="repcent">
-                                    <ul class="star">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
-                                    <span>4.5</span>
-                                    <p>2 Reviews</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="bidrit">
-                                    <h3>$510</h3>
-                                    <p>In 10 Days</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <div class="usy-dt">
-                                    <img src="{%static 'songs_files/smith.png' %}" alt="">
-                                    <div class="usy-name">
-                                        <h3>Rock Smith</h3>
-                                        <span><img src="{%static 'songs_files/icon9.png' %}" alt="">Australia</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="repcent noreview">
-                                    <ul class="star">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                    </ul>
-                                    <span>No rating</span>
-                                    <p>0 Reviews</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div class="bidrit">
-                                    <h3>$510</h3>
-                                    <p>In 10 Days</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
                     </div>
                 </div>
             </div>
