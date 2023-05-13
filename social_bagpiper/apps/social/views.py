@@ -6,7 +6,7 @@ from django.template import loader
 
 from ..authentication.models import User
 from . import forms
-from .models import Event, Song
+from .models import Event, Group, Song
 
 
 @login_required
@@ -111,17 +111,40 @@ def event(request, item_id):
 
 
 @login_required
-def profile(request):
-    template = loader.get_template("profile.html")
-    songs = Song.objects.filter(Q(uploader__id=request.user.id))
-    context = {"songs": songs}
+def groups(request):
+    template = loader.get_template("groups.html")
+    groups_to_show = {}
+    groups = Group.objects.all()
+    for index, group in enumerate(groups):
+        groups_to_show.update({index: {"group": group}})
 
+    print(groups_to_show)
+
+    context = {
+        "groups": groups,
+        "groups_to_show": groups_to_show,
+    }
     return HttpResponse(template.render(context, request))
+
+
+@login_required
+def group(request, item_id):
+    group = Group.objects.get(pk=item_id)
+    return render(request, "group.html", {"group": group})
 
 
 @login_required
 def player(request):
     template = loader.get_template("player.html")
     context = {}
+
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
+def profile(request):
+    template = loader.get_template("profile.html")
+    songs = Song.objects.filter(Q(uploader__id=request.user.id))
+    context = {"songs": songs}
 
     return HttpResponse(template.render(context, request))
