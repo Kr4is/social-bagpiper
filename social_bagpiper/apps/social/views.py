@@ -111,3 +111,10 @@ def profile(request):
     context = {"songs": songs}
 
     return HttpResponse(template.render(context, request))
+
+
+def player(request):
+    template = loader.get_template("player.html")
+    context = {}
+
+    return HttpResponse(template.render(context, request))

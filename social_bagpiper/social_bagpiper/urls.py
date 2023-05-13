@@ -31,6 +31,7 @@ urlpatterns = [
     path("events/", apps.social.views.events, name="events"),
     path("event/<int:item_id>/", apps.social.views.event, name="event"),
     path("profile/", apps.social.views.profile, name="profile"),
+    path("player/", apps.social.views.player, name="player"),
 ]
 
 if settings.DEBUG:

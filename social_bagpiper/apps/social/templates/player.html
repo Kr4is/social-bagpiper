@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}
+SmartPiper Home
+{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/midi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/soundfont-player/dist/soundfont-player.js"></script>
+
+{% load static %}
+<div class="wrapper">
+    {% include "header.html" %}
+
+    <h1>Mi sintetizador en JavaScript</h1>
+    <button type="button"> Start sinte</button>
+    
+</div>
+
+<script>
+
+    // Cargar la biblioteca Web MIDI API para comunicarse con dispositivos MIDI
+    const midi = navigator.requestMIDIAccess();
+
+    // Cargar el archivo SF2 deseado una sola vez
+    {% load static %}
+    const soundfontPromise = Soundfont.instrument(new AudioContext(), "{% static 'soundfont/bag_pipe-mp3.js' %}", { loop: true }).catch((error) => {
+      console.error('Error loading soundfont:', error);
+    });
+
+    // Objeto Map para almacenar las notas que se están reproduciendo
+    const activeNotes = new Map();
+
+    // Variable global para almacenar el instrumento cargado
+    let soundfont;
+
+    // Función para cargar el instrumento MIDI
+    async function loadInstrument() {
+      soundfont = await soundfontPromise;
+      console.log('Instrument loaded successfully!');
+    }
+
+
+    // Función para reproducir una nota MIDI en el sintetizador
+    async function playNote(noteNumber, velocity, options = {}) {
+      // Verificar si la nota ya está sonando
+      if (activeNotes.has(noteNumber)) {
+        return;
+      }
+
+      // Cargar el instrumento MIDI si aún no se ha cargado
+      if (!soundfont) {
+        console.log('Loading instrument...');
+        await loadInstrument();
+      }
+
+      // Combinar las opciones internas con las opciones proporcionadas
+      const mergedOptions = {
+        gain: velocity / 127,
+        attack: 0.0,
+        decay: 0.0,
+        sustain: 1.0,
+        release: 0.0,
+        loop: true,
+        ...options
+      };
+
+      // Reproducir la nota MIDI en el sintetizador con las opciones combinadas
+      const note = soundfont.play(noteNumber, 0, mergedOptions);
+
+      // Agregar la nota al objeto Map
+      activeNotes.set(noteNumber, note);
+    }
+
+
+
+    // Función para detener una nota MIDI en el sintetizador
+    function stopNote(noteNumber) {
+      // Verificar si la nota está sonando
+      if (!activeNotes.has(noteNumber)) {
+        return;
+      }
+
+      // Detener la nota en el sintetizador
+      const note = activeNotes.get(noteNumber);
+      note.stop();
+
+      // Eliminar la nota del objeto Map
+      activeNotes.delete(noteNumber);
+    }
+
+
+    function stopNoteAll() {
+      // Iterar sobre el objeto que contiene todas las notas que se están reproduciendo
+      for (let note in activeNotes) {
+        // Detener la nota
+        soundfont.stop(note);
+        // Eliminar la nota del objeto
+        delete activeNotes[note];
+      }
+    }
+
+
+    // Configurar la comunicación MIDI
+    midi.then((access) => {
+      const inputs = access.inputs.values();
+      const notesPlaying = new Set(); // Registro de notas que se están reproduciendo
+      let secondNoteTimeout = null; // Timeout para detener la segunda nota
+
+      for (let input of inputs) {
+        // Agregar un listener para procesar las notas MIDI entrantes
+        input.onmidimessage = (event) => {
+          // Imprimir los datos del mensaje MIDI en la consola
+          console.log(`MIDI message received: ${event.data[0]} ${event.data[1]} ${event.data[2]}`);
+
+          // Obtener el número de nota MIDI y la velocidad de la entrada
+          const noteNumber = event.data[1];
+          const velocity = event.data[2];
+
+          // Verificar si la nota es de tipo "note on" o "note off"
+          if (event.data[0] === 144 && velocity > 0) {
+            // "Note on" - reproducir la nota en el sintetizador
+            playNote(noteNumber, velocity);
+
+            // Reproducir la nota del ronco al mismo tiempo
+            const bassNoteNumber = 48;
+            playNote(bassNoteNumber, velocity, { loopStart: 2.255519771, loopEnd: 2.756509330 });
+            notesPlaying.add(noteNumber); // Agregar la nota al registro
+
+            // Reproducir la nota de la ronqueta al mismo tiempo
+            const tenorNoteNumber = 55;
+            playNote(tenorNoteNumber, velocity, { loopStart: 2.650727751, loopEnd: 3.110472911 });
+            notesPlaying.add(noteNumber);
+
+            // Detener la segunda nota si se deja de tocar la primera nota después de 2 segundos
+            clearTimeout(secondNoteTimeout);
+            secondNoteTimeout = setTimeout(() => {
+              if (!notesPlaying.has(noteNumber)) {
+                stopNote(bassNoteNumber);
+                stopNote(tenorNoteNumber);
+              }
+            }, 2000);
+
+          } else if (event.data[0] === 128 || (event.data[0] === 144 && velocity === 0)) {
+            // "Note off" - detener la nota en el sintetizador
+            stopNote(noteNumber);
+            notesPlaying.delete(noteNumber); // Quitar la nota del registro
+
+            // Detener la segunda nota si ya no se están reproduciendo notas
+            if (notesPlaying.size === 1) {
+              clearTimeout(secondNoteTimeout);
+              stopNoteAll();
+            }
+          }
+        }
+      }
+    });
+
+
+  </script>
+
+{% include "footer.html" %}
+
+{% endblock %}
