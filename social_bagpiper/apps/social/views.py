@@ -14,7 +14,7 @@ def home(request):
     if request.method == "POST":
         print(request)
         if "upload_song" in request.POST:
-            form = forms.SongForm(request.user, request.POST, request.FILES)
+            form = forms.SongForm(request.POST, request.FILES)
             if form.is_valid():
                 song = Song()
                 song.name = form.cleaned_data["name"]
@@ -24,7 +24,21 @@ def home(request):
                 song.save()
                 return redirect("home")
             else:
-                message = "upload failed!"
+                message = "song upload failed!"
+        elif "upload_event" in request.POST:
+            form = forms.EventForm(request.POST, request.FILES)
+            if form.is_valid():
+                event = Event()
+                event.name = form.cleaned_data["name"]
+                event.description = form.cleaned_data["description"]
+                event.poster = form.cleaned_data["poster"]
+                event.uploader = request.user
+                event.start_date = form.cleaned_data["start_date"]
+                event.end_date = form.cleaned_data["end_date"]
+                event.save()
+                return redirect("home")
+            else:
+                message = "event upload failed!"
                 print(message)
 
         else:
