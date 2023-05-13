@@ -52,54 +52,16 @@ SmartPiper Home
                                         <i class="la la-ellipsis-v"></i>
                                     </div>
                                     <div class="suggestions-list">
+                                        {% for recommended_user in recommended_users %}
                                         <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s1.png' %}" alt="">
+                                            <img style="max-height:35px;max-width:35px;height:auto;width:auto;"  src="{{ recommended_user.profile_photo.url }}" alt="">
                                             <div class="sgt-text">
-                                                <h4>Jessica William</h4>
+                                                <h4>{{ recommended_user.first_name }} {{ recommended_user.last_name }}</h4>
                                                 <span>Graphic Designer</span>
                                             </div>
                                             <span><i class="la la-plus"></i></span>
                                         </div>
-                                        <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s2.png' %}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>John Doe</h4>
-                                                <span>PHP Developer</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
-                                        <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s3.png' %}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>Poonam</h4>
-                                                <span>Wordpress Developer</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
-                                        <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s4.png' %}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>Bill Gates</h4>
-                                                <span>C &amp; C++ Developer</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
-                                        <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s5.png' %}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>Jessica William</h4>
-                                                <span>Graphic Designer</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
-                                        <div class="suggestion-usd">
-                                            <img src="{% static '/login_files/s6.png' %}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>John Doe</h4>
-                                                <span>PHP Developer</span>
-                                            </div>
-                                            <span><i class="la la-plus"></i></span>
-                                        </div>
+                                        {% endfor %}
                                         <div class="view-more">
                                             <a href="#" title="">View More</a>
                                         </div>
