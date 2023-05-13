@@ -33,7 +33,7 @@ class Tag(models.Model):
 
 def song_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/<uploader>/<name>
-    return f"production_files/music_sheets/{instance.uploader.id}/{instance.name}.pdf"
+    return f"music_sheets/{instance.uploader.id}/{instance.name}.pdf"
 
 
 class Song(models.Model):

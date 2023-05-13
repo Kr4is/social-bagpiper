@@ -12,11 +12,13 @@ def home(request):
     if request.method == "POST":
         print(request)
         if "upload_song" in request.POST:
-            form = forms.SongForm(request.POST, request.FILES)
+            form = forms.SongForm(request.user, request.POST, request.FILES)
             if form.is_valid():
-                form.save()
-                song = form.save()
-                song.refresh_from_db()
+                song = Song()
+                song.name = form.cleaned_data["name"]
+                song.description = form.cleaned_data["description"]
+                song.music_sheet = form.cleaned_data["music_sheet"]
+                song.uploader = request.user
                 song.save()
                 return redirect("home")
             else:
