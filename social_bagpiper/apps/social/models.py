@@ -62,3 +62,21 @@ class Tags(models.Model):
 
     def __str__(self):
         return f"{self.song} is {self.tag}"
+
+
+def event_directory_path(instance, filename):
+    return f"events/{instance.uploader.id}/{instance.name}.png"
+
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(null=True)
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE)
+    poster = models.FileField(upload_to=event_directory_path)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    upload_date = models.DateField(auto_now_add=True)
+    modification_date = models.DateField(auto_now=True, db_index=True)
+
+    def __str__(self):
+        return f"{self.name} by {self.uploader}"
