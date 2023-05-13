@@ -20,6 +20,7 @@ def home(request):
                 song.name = form.cleaned_data["name"]
                 song.description = form.cleaned_data["description"]
                 song.music_sheet = form.cleaned_data["music_sheet"]
+                song.midi_file = form.cleaned_data["midi_file"]
                 song.uploader = request.user
                 song.save()
                 return redirect("home")
