@@ -7,6 +7,8 @@ class SongForm(forms.ModelForm):
     name = forms.CharField(max_length=255)
     description = forms.CharField()
     music_sheet = forms.FileField()
+    midi_file = forms.FileField(required=False, initial=None)
+    mp3_file = forms.FileField(required=False, initial=None)
 
     class Meta:
         model = models.Song
