@@ -1759,7 +1759,7 @@ main {
 }
 .widget-about img {
 	float: none;
-	padding-top: 20px;
+	padding-bottom: 20px;
 }
 .widget-about h3 {
 	color: #000000;
