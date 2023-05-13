@@ -6,8 +6,8 @@ SmartPiper Home
 
 {% block content %}
 
-{% include "header.html" %}
 {% load static %}
+{% include "header.html" %}
 <main>
     <div class="main-section">
         <div class="container">
@@ -55,7 +55,8 @@ SmartPiper Home
                                             <img src="{%static 'songs_files/bg-img2.png' %}" alt="">
                                             <div class="usy-name">
                                                 <h3>John Doe</h3>
-                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min ago</span>
+                                                <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min
+                                                    ago</span>
                                             </div>
                                         </div>
                                         <div class="ed-opts">
@@ -72,9 +73,11 @@ SmartPiper Home
                                     </div>
                                     <div class="epi-sec">
                                         <ul class="descp">
-                                            <li><img src="{%static 'songs_files/icon8.png' %}" alt=""><span>Front End Developer</span>
+                                            <li><img src="{%static 'songs_files/icon8.png' %}" alt=""><span>Front End
+                                                    Developer</span>
                                             </li>
-                                            <li><img src="{%static 'songs_files/icon9.png' %}" alt=""><span>India</span></li>
+                                            <li><img src="{%static 'songs_files/icon9.png' %}" alt=""><span>India</span>
+                                            </li>
                                         </ul>
                                         <ul class="bk-links">
                                             <li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
@@ -92,6 +95,14 @@ SmartPiper Home
                                             Suspendisse metus magna, tempus eu ultrices et, maximus id tellus. Ut eu
                                             lacinia ante, id facilisis enim. s. ut suscipit urna sollicitudin at...
                                             view more <a href="#" title="">view more</a></p>
+                                        <p>
+                                            <midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
+                                            <midi-player
+                                                src="/media/HesaPirate.mid"
+                                                type="piano-roll"
+                                                sound-font visualizer="#myVisualizer">
+                                            </midi-player>
+                                        </p>
                                         <ul class="skill-tags">
                                             <li><a href="#" title="">HTML</a></li>
                                             <li><a href="#" title="">PHP</a></li>
@@ -119,7 +130,8 @@ SmartPiper Home
                                                 <img src="{%static 'songs_files/bg-img1.png' %}" alt="">
                                                 <div class="usy-name">
                                                     <h3>John Doe</h3>
-                                                    <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min ago</span>
+                                                    <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min
+                                                        ago</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,7 +144,8 @@ SmartPiper Home
                                                         <img src="{%static 'songs_files/bg-img2.png' %}" alt="">
                                                         <div class="usy-name">
                                                             <h3>John Doe</h3>
-                                                            <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min
+                                                            <span><img src="{%static 'songs_files/clock.png' %}"
+                                                                    alt="">3 min
                                                                 ago</span>
                                                         </div>
                                                     </div>
@@ -150,7 +163,8 @@ SmartPiper Home
                                                 <img src="{%static 'songs_files/bg-img3.png' %}" alt="">
                                                 <div class="usy-name">
                                                     <h3>John Doe</h3>
-                                                    <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min ago</span>
+                                                    <span><img src="{%static 'songs_files/clock.png' %}" alt="">3 min
+                                                        ago</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,11 +431,38 @@ SmartPiper Home
         </div>
     </div>
 </main>
+<footer>
+    <div class="footy-sec mn no-margin">
+        <div class="container">
+            <ul>
+                <li><a href="https://gambolthemes.net/workwise-new/help-center.html" title="">Help Center</a></li>
+                <li><a href="https://gambolthemes.net/workwise-new/about.html" title="">About</a></li>
+                <li><a href="#" title="">Privacy Policy</a></li>
+                <li><a href="#" title="">Community Guidelines</a></li>
+                <li><a href="#" title="">Cookies Policy</a></li>
+                <li><a href="#" title="">Career</a></li>
+                <li><a href="https://gambolthemes.net/workwise-new/forum.html" title="">Forum</a></li>
+                <li><a href="#" title="">Language</a></li>
+                <li><a href="#" title="">Copyright Policy</a></li>
+            </ul>
+            <p><img src="{%static 'songs_files/copy-icon2.png' %}" alt="">Copyright 2019</p>
+            <img class="fl-rgt" src="{%static 'songs_files/logo2.png' %}" alt="">
+        </div>
+    </div>
+</footer>
 
-{% include "footer.html" %}
+</div>
 
+<script
+    src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.5.0"></script>
+<script type="text/javascript" src="{%static 'songs_files/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'songs_files/popper.js' %}"></script>
 <script type="text/javascript" src="{%static 'songs_files/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{%static 'songs_files/jquery.range-min.js' %}"></script>
 <script type="text/javascript" src="{%static 'songs_files/slick.min.js' %}"></script>
+<script type="text/javascript" src="{%static 'songs_files/script.js' %}"></script>
 
+</body>
+
+</html>
 {% endblock %}
