@@ -27,6 +27,7 @@ urlpatterns = [
     path("logout/", apps.authentication.views.logout_user, name="logout"),
     path("home/", apps.social.views.home, name="home"),
     path("songs/", apps.social.views.songs, name="songs"),
+    path("song/<int:item_id>/", apps.social.views.song, name="song"),
 ]
 
 if settings.DEBUG:
