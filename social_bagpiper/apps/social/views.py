@@ -124,6 +124,8 @@ def events(request):
 @login_required
 def event(request, item_id):
     event = Event.objects.get(pk=item_id)
+    event.views += 1
+    event.save()
     return render(request, "event.html", {"event": event})
 
 

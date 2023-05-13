@@ -84,6 +84,7 @@ def event_directory_path(instance, filename):
 class Event(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True)
+    views = models.IntegerField(default=0)
     uploader = models.ForeignKey(User, on_delete=models.CASCADE)
     poster = models.FileField(upload_to=event_directory_path)
     start_date = models.DateField()
