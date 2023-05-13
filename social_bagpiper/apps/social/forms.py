@@ -15,11 +15,3 @@ class SongForm(forms.ModelForm):
             "description",
             "music_sheet",
         ]
-
-    # def save(self, commit=True):
-    #     print("song upload save")
-    #     song = super(SongForm, self).save(commit=False)
-    #     if commit:
-    #         song.save()
-
-    #     return song
