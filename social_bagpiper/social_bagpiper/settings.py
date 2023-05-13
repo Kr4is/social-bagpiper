@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.authentication",
     "apps.social",
+    "sslserver",  # this is needed to make the MIDI site work. Run the app as python manage.py runsslserver localhost:8000
 ]
+
+# USE_X_FORWARDED_HOST = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_SSL_REDIRECT = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
