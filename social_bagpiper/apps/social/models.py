@@ -43,7 +43,7 @@ def midi_directory_path(instance, filename):
 
 def mp3_directory_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/<uploader>/<name>
-    return f"midi_file/{instance.uploader.id}/{instance.name}.mp3"
+    return f"mp3_file/{instance.uploader.id}/{instance.name}.mp3"
 
 
 class Song(models.Model):

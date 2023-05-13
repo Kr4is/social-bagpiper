@@ -14,7 +14,6 @@ from .models import Event, Group, Song, UserFollowing
 @login_required
 def home(request):
     if request.method == "POST":
-        print(request)
         if "upload_song" in request.POST:
             form = forms.SongForm(request.POST, request.FILES)
             if form.is_valid():
@@ -26,7 +25,7 @@ def home(request):
                 song.mp3_file = form.cleaned_data["mp3_file"]
                 song.uploader = request.user
                 song.save()
-                return redirect("home")
+                return redirect(f"/song/{song.id}")
             else:
                 message = "song upload failed!"
         elif "upload_event" in request.POST:
@@ -40,7 +39,7 @@ def home(request):
                 event.start_date = form.cleaned_data["start_date"]
                 event.end_date = form.cleaned_data["end_date"]
                 event.save()
-                return redirect("home")
+                return redirect(f"/song/{event.id}")
             else:
                 message = "event upload failed!"
                 print(message)
