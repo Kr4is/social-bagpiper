@@ -35,6 +35,7 @@ urlpatterns = [
     path("profile/<int:item_id>/", apps.social.views.profile, name="profile"),
     path("player/", apps.social.views.player, name="player"),
     path("follow/<int:item_id>/", apps.social.views.follow, name="follow"),
+    path("unfollow/<int:item_id>/", apps.social.views.unfollow, name="unfollow"),
 ]
 
 if settings.DEBUG:

@@ -230,3 +230,13 @@ def follow(request, item_id):
     follow.save()
 
     return redirect("home")
+
+
+@login_required
+def unfollow(request, item_id):
+    user = UserFollowing.objects.filter(following_user_id=item_id).filter(
+        user_id=request.user
+    )
+    if user:
+        user.delete()
+    return redirect("home")
