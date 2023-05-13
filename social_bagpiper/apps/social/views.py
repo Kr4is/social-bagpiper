@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponse
@@ -55,6 +57,8 @@ def home(request):
     follower_number = request.user.followers.count()
     profile_image = request.user.profile_photo.url
     recommended_users = User.objects.filter(~Q(id=request.user.id))
+    incomming_events = Event.objects.filter(end_date__gt=datetime.now())
+    recommended_songs = Song.objects.filter(~Q(uploader__id=request.user.id))
 
     context = {
         "songs": songs,
@@ -64,6 +68,8 @@ def home(request):
         "follower_number": follower_number,
         "profile_image": profile_image,
         "recommended_users": recommended_users,
+        "incomming_events": incomming_events,
+        "recommended_songs": recommended_songs,
     }
     return HttpResponse(template.render(context, request))
 
@@ -151,9 +157,21 @@ def player(request):
 
 
 @login_required
-def profile(request):
+def profile(request, item_id):
     template = loader.get_template("profile.html")
-    songs = Song.objects.filter(Q(uploader__id=request.user.id))
-    context = {"songs": songs}
+    selected_user = User.objects.get(pk=item_id)
+    songs = Song.objects.filter(Q(uploader__id=item_id))
+    recommended_users = User.objects.filter(~Q(id=item_id))
+    following_number = selected_user.following.count()
+    follower_number = selected_user.followers.count()
+    context = {
+        "selected_user": selected_user,
+        "songs": songs,
+        "recommended_users": recommended_users,
+        "following_number": following_number,
+        "follower_number": follower_number,
+    }
+
+    print(songs)
 
     return HttpResponse(template.render(context, request))

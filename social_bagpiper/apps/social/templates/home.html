@@ -54,11 +54,13 @@ SmartPiper Home
                                     <div class="suggestions-list">
                                         {% for recommended_user in recommended_users %}
                                         <div class="suggestion-usd">
-                                            <img style="max-height:35px;max-width:35px;height:auto;width:auto;"  src="{{ recommended_user.profile_photo.url }}" alt="">
-                                            <div class="sgt-text">
-                                                <h4>{{ recommended_user.first_name }} {{ recommended_user.last_name }}</h4>
-                                                <span>{{ recommended_user.country }} </span>
-                                            </div>
+                                            <a href="/profile/{{ recommended_user.id }}">
+                                                <img style="max-height:35px;max-width:35px;height:auto;width:auto;"  src="{{ recommended_user.profile_photo.url }}" alt="">
+                                                <div class="sgt-text">
+                                                    <h4>{{ recommended_user.first_name }} {{ recommended_user.last_name }}</h4>
+                                                    <span>{{ recommended_user.country }} </span>
+                                                </div>
+                                            </a>
                                             <span><i class="la la-plus"></i></span>
                                         </div>
                                         {% endfor %}
@@ -171,72 +173,38 @@ SmartPiper Home
                                 </div>
                                 <div class="widget widget-jobs">
                                     <div class="sd-title">
-                                        <h3>Top Jobs</h3>
-                                        <i class="la la-ellipsis-v"></i>
+                                        <h3>Incomming events</h3>
+                                        <!-- <i class="la la-ellipsis-v"></i> -->
                                     </div>
                                     <div class="jobs-list">
+                                        {% for incomming_event in incomming_events %}
                                         <div class="job-info">
-                                            <div class="job-details">
-                                                <h3>Senior Product Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                            </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
+                                            <a href="/event/{{ incomming_event.id }}">
+                                                <div class="job-details">
+                                                    <h3>{{ incomming_event.name }}</h3>
+                                                    <p>{{ incomming_event.start_date }} - {{ incomming_event.end_date }}</p>
+                                                </div>
+                                            </a>
                                         </div>
-                                        <div class="job-info">
-                                            <div class="job-details">
-                                                <h3>Senior UI / UX Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                            </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
-                                        </div>
-                                        <div class="job-info">
-                                            <div class="job-details">
-                                                <h3>Junior Seo Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                            </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <div class="widget widget-jobs">
                                     <div class="sd-title">
-                                        <h3>Most Viewed This Week</h3>
+                                        <h3>Recommended songs</h3>
                                         <i class="la la-ellipsis-v"></i>
                                     </div>
                                     <div class="jobs-list">
+                                        {% for recommended_song in recommended_songs %}
                                         <div class="job-info">
+                                            <a href="/song/{{ recommended_song.id }}">
                                             <div class="job-details">
-                                                <h3>Senior Product Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
+                                                <h3>{{ recommended_song.name }}</h3>
+                                                <p>{{ recommended_song.uploader.first_name }} {{ recommended_song.uploader.last_name }}</p>
                                             </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
+                                            </a>
                                         </div>
-                                        <div class="job-info">
-                                            <div class="job-details">
-                                                <h3>Senior UI / UX Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                            </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
-                                        </div>
-                                        <div class="job-info">
-                                            <div class="job-details">
-                                                <h3>Junior Seo Designer</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit..</p>
-                                            </div>
-                                            <div class="hr-rate">
-                                                <span>$25/hr</span>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -293,6 +261,7 @@ SmartPiper Home
                             <input type="text" name="description" placeholder="Description" data-ddg-inputtype="unknown">
                         </div>
                         <div class="col-lg-12">
+                            Poster file
                             <input type="file" name="poster" accept=".png" data-ddg-inputtype="unknown">
                         </div>
                         <div class="col-lg-12">

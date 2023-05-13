@@ -32,7 +32,7 @@ urlpatterns = [
     path("event/<int:item_id>/", apps.social.views.event, name="event"),
     path("groups/", apps.social.views.groups, name="groups"),
     path("group/<int:item_id>/", apps.social.views.group, name="group"),
-    path("profile/", apps.social.views.profile, name="profile"),
+    path("profile/<int:item_id>/", apps.social.views.profile, name="profile"),
     path("player/", apps.social.views.player, name="player"),
 ]
 
