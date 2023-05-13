@@ -70,3 +70,11 @@ def songs(request):
 def song(request, item_id):
     song = Song.objects.get(pk=item_id)
     return render(request, "song.html", {"song": song})
+
+
+def profile(request):
+    template = loader.get_template("profile.html")
+    songs = Song.objects.filter(Q(uploader__id=request.user.id))
+    context = {"songs": songs}
+
+    return HttpResponse(template.render(context, request))

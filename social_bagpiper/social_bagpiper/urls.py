@@ -28,6 +28,7 @@ urlpatterns = [
     path("home/", apps.social.views.home, name="home"),
     path("songs/", apps.social.views.songs, name="songs"),
     path("song/<int:item_id>/", apps.social.views.song, name="song"),
+    path("profile/", apps.social.views.profile, name="profile"),
 ]
 
 if settings.DEBUG:
