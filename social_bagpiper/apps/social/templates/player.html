@@ -10,14 +10,9 @@ SmartPiper Home
 
 {% load static %}
 <div class="wrapper">
-    {% include "header.html" %}
+  {% include "header.html" %}
 
-    <h1>Mi sintetizador en JavaScript</h1>
-    <button type="button"> Start sinte</button>
-    
-</div>
-
-<script>
+  <script>
 
     // Cargar la biblioteca Web MIDI API para comunicarse con dispositivos MIDI
     const midi = navigator.requestMIDIAccess();
@@ -159,6 +154,142 @@ SmartPiper Home
 
   </script>
 
+  <main>
+    <div class="main-section">
+      <div class="container">
+        <div class="main-section-data">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="filter-secs">
+                <div class="filter-heading">
+                  <h3>Midi Synthetizer</h3>
+                </div>
+                <div class="paddy">
+                  <div class="filter-dd">
+                    <div class="filter-ttl">
+                      <h3>Control</h3>
+                    </div>
+                    <form>
+                      <div style="text-align: center;">
+                      <button type="button">Start Synthetizer</button>
+                      </div>
+                    </form>
+                    <br><br>
+                  </div>
+                  <div class="filter-dd">
+                    <div class="filter-ttl">
+                      <h3>Soundfont</h3>
+                    </div>
+                    <form class="job-tp">
+                      <select>
+                        <option selected="selected">bag_pipe-mp3.js</option>
+                        <option>Piano</option>
+                        <option>Guitar</option>
+                        <option>Flute</option>
+                      </select>
+                      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="right-sidebar">
+                <div class="widget widget-jobs">
+                  <div class="sd-title">
+                    <h3>Drones</h3>
+                  </div>
+                  <div class="jobs-list">
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Bass drone:</h3>
+                        <p>48</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Tenor drone:</h3>
+                        <p>55</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Drones end timeout (ms):</h3>
+                        <p>200</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="right-sidebar">
+                <div class="widget widget-jobs">
+                  <div class="sd-title">
+                    <h3>Synthetizer options</h3>
+                  </div>
+                  <div class="jobs-list">
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Gain:</h3>
+                        <p>1.0</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Attack:</h3>
+                        <p>0.0</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Decay:</h3>
+                        <p>0.0</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Sustain:</h3>
+                        <p>1.0</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Release:</h3>
+                        <p>0.0</p>
+                      </div>
+                    </div>
+                    <div class="job-info">
+                      <div class="job-details">
+                        <h3>Loop:</h3>
+                        <p>true</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="right-sidebar">
+                <div class="widget widget-about">
+                  <img src="/media/logo.png" alt="">
+                  <h3>Social Bagpiper</h3>
+                  <span>Your bagpipe colaborative network</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+</div>
+
 {% include "footer.html" %}
+
+<script type="text/javascript" src="{% static 'songs_files/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'songs_files/jquery.range-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'songs_files/slick.min.js' %}"></script>
+
+</div>
 
 {% endblock %}
