@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,13 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-^or+@(u$(x@cd$3qe2_+y0l35ny5zq3nfx)$1%gq*+2ay5gc$z"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:1337"]
 
 # Application definition
 
@@ -83,10 +85,15 @@ WSGI_APPLICATION = "social_bagpiper.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
+
 
 AUTH_USER_MODEL = "authentication.User"
 
@@ -126,15 +133,15 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles/"
 
-STATIC_FILES_DIR = [BASE_DIR / "static/"]
+STATIC_FILES_DIR = [BASE_DIR / "staticfiles/"]
 
 # Base url to serve media files
 MEDIA_URL = "/media/"
 
 # Path where media is stored
-MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_ROOT = BASE_DIR / "mediafiles/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
